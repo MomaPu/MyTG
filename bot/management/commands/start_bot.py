@@ -92,7 +92,7 @@ class Command(BaseCommand):
             await update.message.reply_text(f'Словарь пуст')
 
         context.user_data['current_word'] = word
-        context.user_data['correct_answers'] = 0
+        context.user_data['correct_answers1'] = 0
         context.user_data['total_questions'] = 0
 
         reply_keyboard = [['Показать ответ', 'Закончить тест']]
@@ -213,7 +213,7 @@ class Command(BaseCommand):
         return ConversationHandler.END
 
     def handle(self, *args, **options):
-        app = Application.builder().token('7895528124:AAHedbHd2-adhm0c1Vr5v6Cisvl3v5Unu28').build()
+        app = Application.builder().token('#').build()
 
         # Обычные команды
         app.add_handler(CommandHandler("start", self.start))
