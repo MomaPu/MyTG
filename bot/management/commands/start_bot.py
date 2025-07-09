@@ -1,15 +1,19 @@
+import os
 import random
 
 from asgiref.sync import sync_to_async
 from django.db import transaction
 from django.utils import timezone
 from django.core.management.base import BaseCommand
+from dotenv import load_dotenv
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
 from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove
 import requests
 from urllib.parse import quote
-
 from bot.models import Words
+
+load_dotenv()
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 TESTING, ANSWER = range(2)
 
@@ -213,7 +217,7 @@ class Command(BaseCommand):
         return ConversationHandler.END
 
     def handle(self, *args, **options):
-        app = Application.builder().token('#').build()
+        app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
         # Обычные команды
         app.add_handler(CommandHandler("start", self.start))
